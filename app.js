@@ -31,4 +31,4 @@ client.on('error', console.error);
 client.on('ready', () => console.log('Launched!'));
 
 //login
-client.login('NjI2ODUyMzgxNDMwMTIwNDk4.XY0KIg.U-roAzBmqmnxeeK0WeBSscAdifY');
+client.login('');
