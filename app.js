@@ -2,6 +2,9 @@
 
 const Discord = require('discord.js');
 const FS = require('fs');
+const express = require('express')
+const app = express()
+const http = require('http')
 
 // MODULES
 
@@ -10,6 +13,9 @@ const BotConfig = require('../dcubot/config.json')
 // VARIABLES
 
 const BotClient = new Discord.Client();
+let port = process.env.PORT || 8080
+
+//
 
 BotClient.on('message', message => {
 
@@ -30,6 +36,18 @@ BotClient.on('message', message => {
     console.log(e.stack);
   };
 });
+
+app.get('/', function (req, res) {
+  res.send('hello world')
+})
+
+app.listen(port, function() {
+  console.log('Listening on port ' + port);
+});
+
+setInterval(() => {
+http.get(`https://ca1dcu.herokuapp.com/`); // to keep this app online and not let it go to sleep
+}, 280000);
 
 BotClient.on('error', console.error);
 
