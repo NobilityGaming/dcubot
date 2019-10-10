@@ -1,5 +1,8 @@
 {
   "name": "cabot",
+  "scripts": {
+    "start": "node app.js"
+  },
   "dependencies": {
     "discord.js": "^11.4.2"
   },
