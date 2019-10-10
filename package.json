@@ -1,7 +1,7 @@
 {
-  "name": "",
+  "name": "cabot",
   "dependencies": {
     "discord.js": "^11.4.2"
   },
-  "version": ""
+  "version": "1.0.0"
 }
