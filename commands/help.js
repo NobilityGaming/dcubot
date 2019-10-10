@@ -11,9 +11,9 @@ module.exports.run = async (bot, message, args) => {
                 case "upcheck":
                     message.channel.send(Utility.Embedify(bot, "isitup - check if a site is up or down.\n\nExample: '!isitup redbrick.dcu.ie'"));
                     break;
-                /*case "room":
+                case "room":
                     message.channel.send(Utility.Embedify(bot, "room - provides timetable information for a specified room or building in DCU.\n\nExample: '!room GLA.LG26'"));
-                    break;*/
+                    break;
                 case "weather":
                     message.channel.send(Utility.Embedify(bot, "weather - check the weather forecast by location.\n\nExample '!weather DCU'"));
                     break;
@@ -22,6 +22,6 @@ module.exports.run = async (bot, message, args) => {
                     break;
             }
         } else {
-            message.channel.send(Utility.Embedify(bot, "The following commands are available: \n • help\n • upcheck\n • bus\n • weather\n • class"));
+            message.channel.send(Utility.Embedify(bot, "The following commands are available: \n • help\n • upcheck\n • bus\n • weather\n • class\n • room"));
         }
 };
