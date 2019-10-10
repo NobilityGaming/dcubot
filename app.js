@@ -45,7 +45,7 @@ app.listen(port, function() {
 });
 
 setInterval(() => {
-http.get(`https://ca1dcu.herokuapp.com/`); // to keep this app online and not let it go to sleep
+http.get(`http://ca1dcu.herokuapp.com/`); // to keep this app online and not let it go to sleep
 }, 280000);
 
 BotClient.on('error', console.error);
