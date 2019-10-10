@@ -7,7 +7,7 @@ const http = require('http')
 
 // MODULES
 
-const BotConfig = require('../dcubot/config.json')
+const BotConfig = require('./config.json')
 
 // VARIABLES
 
