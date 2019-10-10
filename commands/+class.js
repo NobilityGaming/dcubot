@@ -65,7 +65,7 @@ console.log("Day: " + day)
       await page.mouse.up();
       await page.keyboard.type(course); // fill in search box
       await page.mouse.move(104, 296, {steps: 5}); // goto course selector
-      await page.waitFor(1000); // wait for course to show up
+      await page.waitFor(2000); // wait for course to show up
       await page.mouse.down(); // select course
       await page.mouse.up();
       await page.waitFor(2000); // wait for time table to load
@@ -100,7 +100,7 @@ console.log("Day: " + day)
       await page.mouse.move( xcord , ycord , {steps: 5}); // goto cords / class
       await page.mouse.down(); // select class
       await page.mouse.up();
-      await page.waitFor(1000); // wait for load
+      await page.waitFor(1500); // wait for load
 // find element data
       let itemdata = await page.evaluate(() => {
           let classname = document.querySelector("body > app-root > app-layout > app-desktop > div.wrapper > div > div.right-sidebar.slid-in-right-sidebar > app-activity-details > div > div > div.c-filter-block > div.c-filter-block__item.js-pg-changemanage-filter.is-disabled.i-core.i-core--file-text2 > p > span").innerText;
@@ -126,32 +126,35 @@ console.log("Day: " + day)
 // find building
         if (String(buildingletters) === "L" || String(buildingletters) === "LG"){
           var building = "McNulty Building";
-          var image = "";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192317223010314/McNultyBuilding.png";
         } else if (String(buildingletters) === "N" || String(buildingletters) === "NG") {
           var building = "Marconi Building";
-          var image = "";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192315222327296/MarconiBuilding.png";
         } else if (String(buildingletters) === "X" || String(buildingletters) === "XG" || String(buildingletters) === 'XG,A,B,') {
           var building = "Lonsdale Building";
-          var image = "";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192313435684883/LonsdaleBuilding.png";
         } else if (String(buildingletters) === "S" || String(buildingletters) === "SG" || String(buildingletters) === "SA") {
           var building = "Stokes Building";
-          var image = "";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192318334500895/StokesBuilding.png";
         } else if (String(buildingletters) === "Q" || String(buildingletters) === "QG") {
           var building = "DCU Business School";
-          var image = "";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192323321397249/DCUBusinessSchool.png";
         } else if (String(buildingletters) === "C" || String(buildingletters) === "CG") {
           var building = "Henry Grattan Building";
-          var image = "";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192311007051796/HenryGrattanBuilding.png";
         } else if (String(buildingletters) === "H" || String(buildingletters) === "HG") {
           var building = "Healthy Living Center";
-          var image = "";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192328937570325/HealthyLivingCentre.png";
         } else if (String(buildingletters) === "A" || String(buildingletters) === "AG") {
           var building = "Albert College";
-          var image = "";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192321907916831/AlbertCollege.png";
         } else if (String(buildingletters) === "T" || String(buildingletters) === "TG") {
           var building = "Terence Larkin Theatre";
-          var image = "";
-        } else {var building = buildingletters + ", Unknown/Unimplemented Building";}
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192319437602817/TerenceLarkinTheatre.png";
+        } else {
+          var building = buildingletters + ", Unknown/Unimplemented Building";
+          var image = "https://cdn.discordapp.com/attachments/491690629378736139/630192609222066185/20191004_112248_-_Copy.jpg"
+          }
 // make discord form
         let messageform = new Discord.RichEmbed()
             .setAuthor("CLASS INFO")
@@ -162,6 +165,7 @@ console.log("Day: " + day)
             .addField("Time:", classtime, false)
             .addField("Day:", classday, false)
             .addField("Lecturer:", lecturer, false)
+            .setImage(image)
             .setFooter(`Date: ` + classdate, message.author.displayAvatarURL);
 // send discord form
         message.channel.send(messageform);
