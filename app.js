@@ -1,6 +1,9 @@
 // DEPENDANCIES
 
 const Discord = require('discord.js');
+const scores = require("./variables/scores.json");
+const reminderfile = require("./variables/reminder.json");
+const fs = require('fs');
 const express = require('express')
 const app = express()
 const http = require('http')
@@ -13,6 +16,55 @@ const BotConfig = require('./config.json')
 
 const BotClient = new Discord.Client();
 let port = process.env.PORT || 8080
+
+// reminder + religion variable saving
+BotClient.on('message', message => {
+
+  fs.writeFile("./variables/reminder.json", JSON.stringify(reminderfile), (err) => {
+              if (err) console.log(err)});
+
+if (message.content.startsWith(prefix)) return;
+if (message.author.bot) return;
+if (!scores["team1"]) {
+    scores["team1"] = {
+        members: 0,
+        score: 0
+    };
+}
+if (!scores["team2"]) {
+    scores["team2"] = {
+        members: 0,
+        score: 0
+    };
+}
+
+var scoreGainTeamOne = 0;
+let teamOneMemberCount = scores["team1"].members;
+let teamOneScore = scores["team1"].score;
+let scoreMultiplierTeamOne = Math.round(teamOneMemberCount * 1.2 * 10) / 10;
+
+var scoreGainTeamTwo = 0;
+let teamTwoMemberCount = scores["team2"].members;
+let teamTwoScore = scores["team2"].score;
+let scoreMultiplierTeamTwo = Math.round(teamTwoMemberCount * 1.2 * 10) / 10;
+
+if(message.member.roles.find(r => r.name === "Thomasites")){
+let scoreGainTeamOne = Math.round((scoreMultiplierTeamOne + teamOneScore) * 10) / 10;
+scores["team1"].score = scoreGainTeamOne;
+fs.writeFile("./variables/scores.json", JSON.stringify(scores), (err) => {
+            if (err) console.log(err)});
+console.log("Thomasites score: " + scoreGainTeamOne + " score!");
+};
+
+if(message.member.roles.find(r => r.name === "Johnathists")){
+let scoreGainTeamTwo = Math.round((scoreMultiplierTeamTwo + teamTwoScore) * 10) / 10;
+scores["team2"].score = scoreGainTeamTwo;
+fs.writeFile("./variables/scores.json", JSON.stringify(scores), (err) => {
+            if (err) console.log(err)});
+console.log("Johnathists score: " + scoreGainTeamTwo + " score!");
+};
+
+});
 
 //
 
