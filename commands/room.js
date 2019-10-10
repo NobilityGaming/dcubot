@@ -13,6 +13,7 @@ module.exports.run = async (bot, message, args) => {
             },
             function(error, response, body) {
                 message.channel.send(Utility.Embedify(bot, body));
+                console.log(body)
             });
 	}
 };
