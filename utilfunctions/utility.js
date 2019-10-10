@@ -5,10 +5,11 @@ module.exports = {
     CmdErr: function(bot, message, example) {
         message.channel.send(module.exports.Embedify(bot, `Too many arguments supplied. Try ${example}`));
     },
-    Embedify: function(bot, contents) {
+    Embedify: function(bot, contents, color) {
+        embedcolor = color || 0x36393e
 	return {embed: 
             {
-                color: 0x36393e,
+                color: embedcolor,
                 description: contents,
                 timestamp: new Date(),
                 footer: {
