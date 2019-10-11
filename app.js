@@ -67,7 +67,7 @@ console.log("Johnathists score: " + scoreGainTeamTwo + " score!");
 });*/
 
 //
-
+//hi
 BotClient.on('message', message => {
 
   if (message.author.bot) return;
