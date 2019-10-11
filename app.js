@@ -1,8 +1,8 @@
 // DEPENDANCIES
 
 const Discord = require('discord.js');
-const scores = require("./variables/scores.json");
-const reminderfile = require("./variables/reminder.json");
+//const scores = require("./variables/scores.json");
+//const reminderfile = require("./variables/reminder.json");
 const fs = require('fs');
 const express = require('express')
 const app = express()
@@ -18,7 +18,7 @@ const BotClient = new Discord.Client();
 let port = process.env.PORT || 8080
 
 // reminder + religion variable saving
-BotClient.on('message', message => {
+/*BotClient.on('message', message => {
 
   fs.writeFile("./variables/reminder.json", JSON.stringify(reminderfile), (err) => {
               if (err) console.log(err)});
@@ -64,7 +64,7 @@ fs.writeFile("./variables/scores.json", JSON.stringify(scores), (err) => {
 console.log("Johnathists score: " + scoreGainTeamTwo + " score!");
 };
 
-});
+});*/
 
 //
 
