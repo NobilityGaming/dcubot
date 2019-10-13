@@ -1,8 +1,7 @@
-var request = require("request");
-var Utility = require("../utilfunctions/utility");
-
 const rp = require('request-promise');
 const cheerio = require('cheerio');
+
+var Utility = require("../utilfunctions/utility");
 
 function HTMLtoJSON(rawHTML) {
     let options = {
