@@ -7,6 +7,9 @@ const fs = require('fs');
 const express = require('express')
 const app = express()
 const http = require('http')
+var bodyParser = require('body-parser')
+
+app.use(bodyParser.json());  
 
 // MODULES
 
@@ -97,6 +100,19 @@ BotClient.on('message', message => {
 
 app.get('/', function (req, res) {
   res.send('hello world')
+})
+
+app.post('/birthdayreminder', function (req, res) {
+  let name = req.body.name
+  let birthday = req.body.birthday
+
+  if (!name && !birthday) { return }
+
+  let CADisc = BotClient.guilds.get('625718359270359051')
+  BOTCHANNEL = CADisc.channels.get("628664930148679681")
+  BOTCHANNEL.send(`It's ${name}'s Birthday today (${birthday})! :cake: :smile:`)
+
+  res.sendStatus(200)
 })
 
 app.listen(port, function() {

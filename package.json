@@ -4,12 +4,12 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "cheerio": "1.0.0-rc.3",
     "discord.js": "^11.4.2",
     "express": "^4.17.1",
+    "puppeteer": "^1.20.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "cheerio": "1.0.0-rc.3",
-    "puppeteer": "^1.20.0"
+    "request-promise": "^4.2.4"
   },
   "version": "1.0.0"
 }
