@@ -104,13 +104,12 @@ app.get('/', function (req, res) {
 
 app.post('/birthdayreminder', function (req, res) {
   let name = req.body.name
-  let birthday = req.body.birthday
 
-  if (!name && !birthday) { return }
+  if (!name) { return }
 
   let CADisc = BotClient.guilds.get('625718359270359051')
-  BOTCHANNEL = CADisc.channels.get("628664930148679681")
-  BOTCHANNEL.send(`It's ${name}'s Birthday today (${birthday})! :cake: :smile:`)
+  BOTCHANNEL = CADisc.channels.get("625718359740383232")
+  BOTCHANNEL.send(`It's ${name}'s Birthday today! :cake: :smile:`)
 
   res.sendStatus(200)
 })
