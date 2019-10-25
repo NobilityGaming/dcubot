@@ -14,7 +14,7 @@ module.exports = {
                 timestamp: new Date(),
                 footer: {
                     icon_url: bot.user.avatarURL,
-                    text: "Powered by redbrick!"
+                    text: "CA1"
                 }
             }
 	};
