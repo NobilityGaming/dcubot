@@ -104,6 +104,7 @@ module.exports.run = async (bot, message, args) => {
             SortByTime(ClassesToday)
             .then(SortedArray => {
                 Str = ""
+                Str2 = ""
 
                 Object.keys(SortedArray).forEach(Property => {
                     let CurrClass = SortedArray[Property]
@@ -113,13 +114,14 @@ module.exports.run = async (bot, message, args) => {
                     }
         
                     Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
+                    Str2 = Str2 + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
                 })
 
                 if (message != null) {
                     message.channel.send(Utility.Embedify(bot, Str))
                 }
 
-                resolve(SortedArray)
+                resolve(Str2)
             })
         })
         .catch(err => {
