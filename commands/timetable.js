@@ -114,7 +114,7 @@ module.exports.run = async (bot, message, args) => {
                     }
         
                     Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
-                    Str2 = Str2 + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
+                    Str2 = Str2 + (`\n\n ${CurrClass.ClassName} (${CurrClass.Type}) - @ ${CurrClass.Time} in ${CurrClass.Location}`)
                 })
 
                 if (message != null) {
