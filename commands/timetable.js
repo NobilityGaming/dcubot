@@ -79,46 +79,52 @@ function FetchTimetable(Body) {
 }
 
 module.exports.run = async (bot, message, args) => {
+    return new Promise(function(resolve, reject) {
+        DayToCheck = null
 
-    DayToCheck = null
+        if (args != null && args.length == 1) {
+            DayToCheck = args[0]
+        }
 
-    if (args.length == 1) {
-        DayToCheck = args[0]
-    }
+        FetchTimetable(EditTemplate(LoadNewTemplate(), DayToCheck))
+        .then(Classes => {
+            let ClassesToday = []
 
-    FetchTimetable(EditTemplate(LoadNewTemplate(), DayToCheck))
-    .then(Classes => {
-        let ClassesToday = []
+            ClassesArray = Classes[0].CategoryEvents
+            ClassesArray.forEach(Class => {
+                let ThisClass = new Object
+                ThisClass.ClassName = Class.Description
+                ThisClass.Type = Class.EventType
+                ThisClass.Time = Class.EndDateTime.slice(11, -9)
+                ThisClass.Location = Class.Location.substring(4)
 
-        ClassesArray = Classes[0].CategoryEvents
-        ClassesArray.forEach(Class => {
-            let ThisClass = new Object
-            ThisClass.ClassName = Class.Description
-            ThisClass.Type = Class.EventType
-            ThisClass.Time = Class.EndDateTime.slice(11, -9)
-            ThisClass.Location = Class.Location.substring(4)
+                ClassesToday.push(ThisClass)
+            });
+        
+            SortByTime(ClassesToday)
+            .then(SortedArray => {
+                Str = ""
 
-            ClassesToday.push(ThisClass)
-        });
-    
-        SortByTime(ClassesToday)
-        .then(SortedArray => {
-            Str = ""
+                Object.keys(SortedArray).forEach(Property => {
+                    let CurrClass = SortedArray[Property]
+        
+                    if (CurrClass.ClassName == null) { // because apparently fucking IT Mathematics is null? lol
+                        CurrClass.ClassName = 'IT Mathematics'
+                    }
+        
+                    Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
+                })
 
-            Object.keys(SortedArray).forEach(Property => {
-                let CurrClass = SortedArray[Property]
-    
-                if (CurrClass.ClassName == null) { // because apparently fucking IT Mathematics is null? lol
-                    CurrClass.ClassName = 'IT Mathematics'
+                if (message != null) {
+                    message.channel.send(Utility.Embedify(bot, Str))
                 }
-    
-                Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
-            })
 
-            message.channel.send(Utility.Embedify(bot, Str))
+                resolve(SortedArray)
+            })
         })
-    })
-    .catch(err => {
-        console.log(err)
+        .catch(err => {
+            console.log(err)
+            reject(err)
+        })
     })
 }

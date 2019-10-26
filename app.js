@@ -102,6 +102,15 @@ app.get('/', function (req, res) {
   res.send('hello world')
 })
 
+app.post('/fetchtimetable', function (req, res) {
+  let Timetable = require('./commands/timetable.js')
+
+  Timetable.run(BotClient, null, ['Monday'])
+  .then(stuff => {
+    res.send(stuff)
+  })
+})
+
 app.post('/birthdayreminder', function (req, res) {
   let name = req.body.name
 
