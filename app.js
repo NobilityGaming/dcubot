@@ -7,6 +7,7 @@ const fs = require('fs');
 const express = require('express')
 const app = express()
 const http = require('http')
+const request = require('request')
 var bodyParser = require('body-parser')
 
 app.use(bodyParser.json());  
@@ -107,7 +108,16 @@ app.post('/fetchtimetable', function (req, res) {
 
   Timetable.run(BotClient, null, ['Monday'])
   .then(stuff => {
-    res.send(stuff)
+    request.post(
+        'https://maker.ifttt.com/trigger/timetable/with/key/mZyk_-5pAj2Q1XJ-pC-vjCZJL2yiC9LZSPR0vWrsI1x',
+        { json: { value1: stuff } },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+            }
+        }
+    );
+    res.send(200)
   })
 })
 
@@ -126,6 +136,8 @@ app.post('/birthdayreminder', function (req, res) {
 app.listen(port, function() {
   console.log('Listening on port ' + port);
 });
+
+http.post()
 
 setInterval(() => {
 http.get(`http://ca1dcu.herokuapp.com/`); // to keep this app online and not let it go to sleep
