@@ -137,8 +137,6 @@ app.listen(port, function() {
   console.log('Listening on port ' + port);
 });
 
-http.post()
-
 setInterval(() => {
 http.get(`http://ca1dcu.herokuapp.com/`); // to keep this app online and not let it go to sleep
 }, 280000);
