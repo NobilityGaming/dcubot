@@ -10,7 +10,7 @@ const http = require('http')
 const request = require('request')
 var bodyParser = require('body-parser')
 
-app.use(bodyParser.json());  
+//app.use(bodyParser.json());  
 
 // MODULES
 
@@ -105,8 +105,8 @@ app.get('/', function (req, res) {
 
 app.post('/fetchtimetable', function (req, res) {
   let Timetable = require('./commands/timetable.js')
-  console.log(req.body)
-  Timetable.run(BotClient, null, [req.body])
+
+  Timetable.run(BotClient, null, null)
   .then(stuff => {
     request.post(
         'https://maker.ifttt.com/trigger/timetable/with/key/mZyk_-5pAj2Q1XJ-pC-vjCZJL2yiC9LZSPR0vWrsI1x',
