@@ -106,14 +106,15 @@ app.get('/', function (req, res) {
 app.post('/fetchtimetable', function (req, res) {
   let Timetable = require('./commands/timetable.js')
 
-  Timetable.run(BotClient, null, null)
+  Timetable.run(BotClient, null, ['Monday'])
   .then(stuff => {
     request.post(
         'https://maker.ifttt.com/trigger/timetable/with/key/mZyk_-5pAj2Q1XJ-pC-vjCZJL2yiC9LZSPR0vWrsI1x',
         { json: { value1: stuff } },
         function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                console.log(body);
+              console.log(stuff)
+              console.log(body);
             }
         }
     );
