@@ -98,15 +98,15 @@ module.exports.run = async (bot, message, args) => {
                 ThisClass.Time = Class.StartDateTime.slice(11, -9)
                 ThisClass.Location = Class.Location.substring(4)
 
-                if (ThisClass.Time == '08:00') { ThisClass.Time = '09:00' }
+                if (ThisClass.Time == '08:00') { ThisClass.Time = '09:00' } // because apparently maths starts at 8
 
                 ClassesToday.push(ThisClass)
             });
         
             SortByTime(ClassesToday)
             .then(SortedArray => {
-                Str = ""
-                Str2 = ""
+                Str = "" // for sending on discord
+                Str2 = "" // for use with the google assistant
 
                 Object.keys(SortedArray).forEach(Property => {
                     let CurrClass = SortedArray[Property]
@@ -114,8 +114,15 @@ module.exports.run = async (bot, message, args) => {
                     if (CurrClass.ClassName == null) { // because apparently fucking IT Mathematics is null? lol
                         CurrClass.ClassName = 'IT Mathematics'
                     }
-        
-                    Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
+
+                    
+                    let CurrentTime = new Date().toISOString()
+                    
+                    if (CurrentTime.slice(11, -11) > CurrClass.Time.slice(0, -3)) { // add tick 
+                        Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location} ✅`)
+                    } else {
+                        Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
+                    }
                     Str2 = Str2 + (`\n\n ${CurrClass.ClassName} (${CurrClass.Type}) - @ ${CurrClass.Time} in ${CurrClass.Location}`)
                 })
 
