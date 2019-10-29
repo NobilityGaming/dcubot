@@ -95,8 +95,10 @@ module.exports.run = async (bot, message, args) => {
                 let ThisClass = new Object
                 ThisClass.ClassName = Class.Description
                 ThisClass.Type = Class.EventType
-                ThisClass.Time = Class.EndDateTime.slice(11, -9)
+                ThisClass.Time = Class.StartDateTime.slice(11, -9)
                 ThisClass.Location = Class.Location.substring(4)
+
+                if (ThisClass.Time == '08:00') { ThisClass.Time = '09:00' }
 
                 ClassesToday.push(ThisClass)
             });
