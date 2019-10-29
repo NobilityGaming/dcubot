@@ -117,8 +117,10 @@ module.exports.run = async (bot, message, args) => {
 
                     
                     let CurrentTime = new Date().toISOString()
-                    
-                    if (CurrentTime.slice(11, -11) > CurrClass.Time.slice(0, -3)) { // add tick 
+                    let Day = new Date().getDay() - 1
+
+                    if ((CurrentTime.slice(11, -11) > CurrClass.Time.slice(0, -3)) && Weekdays.indexOf(args[0]) <= Day) {
+                        // if the day has already passed we want to mark the lectures as done too
                         Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location} ✅`)
                     } else {
                         Str = Str + (`\n\n *${CurrClass.ClassName}* (${CurrClass.Type}) - @ **${CurrClass.Time}** in ${CurrClass.Location}`)
