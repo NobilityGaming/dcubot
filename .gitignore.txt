@@ -1,2 +1,1 @@
-# Ignore config file
-/config.json
+.env
