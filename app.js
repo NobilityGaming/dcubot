@@ -1,5 +1,7 @@
 // DEPENDANCIES
 
+require('dotenv').config()
+
 const Discord = require('discord.js');
 //const scores = require("./variables/scores.json");
 //const reminderfile = require("./variables/reminder.json");
@@ -146,4 +148,4 @@ BotClient.on('error', console.error);
 
 BotClient.on('ready', () => console.log('Launched!'));
 
-BotClient.login(BotConfig.token);
+BotClient.login(process.env.token);
