@@ -148,4 +148,4 @@ BotClient.on('error', console.error);
 
 BotClient.on('ready', () => console.log('Launched!'));
 
-BotClient.login(process.env.token);
+BotClient.login(BotConfig.token);
