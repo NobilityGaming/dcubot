@@ -12,7 +12,7 @@ const http = require('http')
 const request = require('request')
 var bodyParser = require('body-parser')
 
-//app.use(bodyParser.json());  
+app.use(bodyParser.json());  
 
 // MODULES
 
