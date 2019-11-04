@@ -8,7 +8,7 @@ module.exports.run = async (bot, message, args) => {
 	}
 	else if (args.length > 0) {
             request.post({
-                url:     "https://brickbot.seanfradl.com/timetable/",
+                url:     "https://faas.jamesmcdermott.ie/function/dcurooms",
                 body:    args
             },
             function(error, response, body) {
