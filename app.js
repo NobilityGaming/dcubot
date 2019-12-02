@@ -10,6 +10,7 @@ const express = require('express')
 const app = express()
 const http = require('http')
 const request = require('request')
+const scheduler = require('node-schedule')
 var bodyParser = require('body-parser')
 
 app.use(bodyParser.json());  
@@ -108,7 +109,7 @@ app.get('/', function (req, res) {
 app.post('/fetchtimetable', function (req, res) {
   let Timetable = require('./commands/timetable.js')
 
-  Timetable.run(BotClient, null, null)
+  Timetable.run(BotClient, null, null, 'GA')
   .then(stuff => {
     request.post(
         'https://maker.ifttt.com/trigger/timetable/with/key/mZyk_-5pAj2Q1XJ-pC-vjCZJL2yiC9LZSPR0vWrsI1x',
@@ -139,6 +140,20 @@ app.post('/birthdayreminder', function (req, res) {
 app.listen(port, function() {
   console.log('Listening on port ' + port);
 });
+
+scheduler.scheduleJob('0 0 * * *', () => { 
+  let Timetable = require('./commands/timetable.js')
+  let Today = new Date();
+  let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  
+  var NameOfDay = Days[Today.getDay()];
+  Timetable.run(BotClient, null, [NameOfDay])
+  .then(stuff => {
+    let CADisc = BotClient.guilds.get('625718359270359051')
+    TTChannel = CADisc.channels.get("651021197936427009")
+    TTChannel.send(stuff)
+  })
+})
 
 setInterval(() => {
 http.get(`http://ca1dcu.herokuapp.com/`); // to keep this app online and not let it go to sleep

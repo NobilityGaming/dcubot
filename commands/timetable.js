@@ -78,7 +78,7 @@ function FetchTimetable(Body) {
     })
 }
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (bot, message, args, purpose) => {
     return new Promise(function(resolve, reject) {
         DayToCheck = null
 
@@ -131,8 +131,11 @@ module.exports.run = async (bot, message, args) => {
                 if (message != null) {
                     message.channel.send(Utility.Embedify(bot, Str))
                 }
-
-                resolve(Str2)
+                if (purpose == "GA") {
+                    resolve(Str2)
+                } else {
+                    resolve(Str)
+                }
             })
         })
         .catch(err => {
