@@ -155,6 +155,9 @@ scheduler.scheduleJob('0 0 * * *', () => {
     TTChannel.send(`**${NameOfDay}**`)
     TTChannel.send(Utility.Embedify(BotClient, stuff))
   })
+  .catch(err => {
+    console.log(err)
+  })
 })
 
 setInterval(() => {
