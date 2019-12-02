@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 // MODULES
 
+const Utility = require("./utilfunctions/utility.js");
 const BotConfig = require('./config.json')
 
 // VARIABLES
@@ -145,13 +146,13 @@ scheduler.scheduleJob('0 0 * * *', () => {
   let Timetable = require('./commands/timetable.js')
   let Today = new Date();
   let Days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  
+
   var NameOfDay = Days[Today.getDay()];
   Timetable.run(BotClient, null, [NameOfDay])
   .then(stuff => {
     let CADisc = BotClient.guilds.get('625718359270359051')
     TTChannel = CADisc.channels.get("651021197936427009")
-    TTChannel.send(stuff)
+    TTChannel.send(Utility.Embedify(BotClient, stuff))
   })
 })
 
@@ -161,6 +162,8 @@ http.get(`http://ca1dcu.herokuapp.com/`); // to keep this app online and not let
 
 BotClient.on('error', console.error);
 
-BotClient.on('ready', () => console.log('Launched!'));
+BotClient.on('ready', () => {
+  console.log('Launched!')
+})
 
 BotClient.login(BotConfig.token);
