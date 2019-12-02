@@ -152,6 +152,7 @@ scheduler.scheduleJob('0 0 * * *', () => {
   .then(stuff => {
     let CADisc = BotClient.guilds.get('625718359270359051')
     TTChannel = CADisc.channels.get("651021197936427009")
+    TTChannel.send(`**${NameOfDay}**`)
     TTChannel.send(Utility.Embedify(BotClient, stuff))
   })
 })
